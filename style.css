@@ -1,0 +1,51 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #99ccff, #ffccff);
+    font-family: 'Vazir', sans-serif;
+    text-align: center;
+    overflow: hidden;
+}
+
+.card {
+    padding: 40px;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+#title {
+    font-size: 40px;
+    color: #333366;
+    margin-bottom: 20px;
+}
+
+.moon {
+    width: 200px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #99ccff;
+}
+
+#message {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #222;
+}
+
+.hidden {
+    display: none;
+}
+
+.butterfly {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url('butterfly.png');
+    background-size: cover;
+    animation: fly 5s linear infinite;
+}
+
+@keyframes fly {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-800px) rotate(360deg); }
+}
