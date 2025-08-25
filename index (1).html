@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>بازی عاشقانه نهایی</title>
+<style>
+  body { margin:0; padding:0; background: linear-gradient(to bottom, #0a0a2a, #000); overflow:hidden; font-family:Tahoma,sans-serif; color:white; text-align:center; }
+  #score { font-size:24px; margin:10px; }
+  .falling { position:absolute; font-size:30px; cursor:pointer; animation:fall linear infinite; }
+  @keyframes fall { 0% { top:-50px; } 100% { top:100vh; } }
+  #winScreen { position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,20,0.95); display:none; flex-direction:column; justify-content:center; align-items:center; color:white; font-size:22px; }
+  .star { width:4px; height:4px; background:white; border-radius:50%; position:absolute; animation:twinkle 2s infinite alternate; }
+  @keyframes twinkle { from{opacity:0.2;} to{opacity:1;} }
+  .moon { width:100px; height:100px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff, #ccc); margin-bottom:20px; }
+</style>
+</head>
+<body>
+
+<div id="score">امتیاز: 0</div>
+<div id="winScreen">
+  <div class="moon"></div>
+  <p>ستایش من عاشقتم 🌙❤️</p>
+  <p>لطفا عاشقم باش، ازم سرد نشو و ازم بی‌اعتماد نشو</p>
+  <p>ببخشید اگه گاهی حرفی میزنم که خوشت نمیاد، درستش می‌کنم :)</p>
+</div>
+
+<script>
+let score = 0;
+const scoreBox = document.getElementById("score");
+const winScreen = document.getElementById("winScreen");
+
+function createItem() {
+  const item = document.createElement("div");
+  item.classList.add("falling");
+  item.style.left = Math.random() * window.innerWidth + "px";
+  item.style.top = "-30px";
+  item.innerHTML = Math.random()<0.7 ? "❤️" : "🌹";
+  item.style.animationDuration = (3 + Math.random()*2) + "s";
+
+  item.addEventListener("click", () => {
+    score++;
+    scoreBox.textContent = "امتیاز: " + score;
+    item.remove();
+    if(score>=10) showWinScreen();
+  });
+
+  document.body.appendChild(item);
+  setTimeout(()=>{ if(item) item.remove(); },5000);
+}
+
+function showWinScreen(){
+  if(winScreen.style.display==="flex") return;
+  winScreen.style.display="flex";
+  // ستاره‌ها بسازیم
+  for(let i=0;i<50;i++){
+    const star=document.createElement("div");
+    star.classList.add("star");
+    star.style.left=Math.random()*window.innerWidth+"px";
+    star.style.top=Math.random()*window.innerHeight+"px";
+    star.style.animationDuration=(1+Math.random()*2)+"s";
+    winScreen.appendChild(star);
+  }
+}
+
+setInterval(createItem,1000);
+</script>
+
+</body>
+</html>
